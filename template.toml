@@ -1,0 +1,15 @@
+name = "Django"
+kickstart_version = 1
+ignore = [
+    "my-project/.venv",
+    "my-project/node_modules",
+    "my-project/db.sqlite3",
+]
+directory = "my-project"
+copy_without_render = ["*.html"]
+
+[[variables]]
+name = "project_name"
+default = "my-project"
+prompt = "What is the name of this project?"
+validation = "^([a-zA-Z][a-zA-Z0-9_-]+)$"

@@ -1,0 +1,5 @@
+django
+django_vite_plugin
+
+# Dev
+djlint
