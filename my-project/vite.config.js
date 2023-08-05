@@ -4,8 +4,8 @@ import djangoVite from 'django-vite-plugin'
 export default defineConfig({
     plugins: [
         djangoVite([
-            'theme/js/main.js',
-            'theme/css/main.css',
+            'theme/js/apj.js',
+            'theme/css/styles.css',
         ])
     ],
 });

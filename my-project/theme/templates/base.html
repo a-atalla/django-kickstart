@@ -1,14 +1,15 @@
-{%load vite%}
+{% load vite %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {%vite%}
-    {% vite "theme/js/main.js" "theme/css/main.css" %}
-    <title>Django Kickstart</title>
-</head>
-<body>
-    {% block main %}{% endblock main %}
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% vite %}
+        {% vite "theme/js/app.js" "theme/css/styles.css" %}
+        <title>Django Kickstart</title>
+    </head>
+    <body>
+        {% block main %}
+        {% endblock main %}
+    </body>
 </html>

@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@hotwired/stimulus": "^3.2.1",
     "django-vite-plugin": "^1.2.0",
     "vite": "^4.4.8"
   },
