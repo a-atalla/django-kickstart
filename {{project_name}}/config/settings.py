@@ -33,14 +33,12 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     # External Apps
-    'django_vite_plugin',
+    "django_vite_plugin",
     "debug_toolbar",
-    'django_extensions',
-
+    "django_extensions",
     # Local Apps
     "core",
     "theme",
-
     # Django Buiiltin Apps
     "django.contrib.admin",
     "django.contrib.auth",
@@ -84,14 +82,36 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
+{% if database == "sqlite" %}
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
-
+{% elif database == "postgres" %}
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "",
+        "USER": "",
+        "PASSWORD": "",
+        "HOST": "127.0.0.1",
+        "PORT": "5432",
+    }
+}
+{% elif database == "mysql" %}
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "",
+        "USER": "",
+        "PASSWORD": "",
+        "HOST": "127.0.0.1",
+        "PORT": "3306",
+    }
+}
+{% endif %}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
