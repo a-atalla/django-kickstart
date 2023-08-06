@@ -1,0 +1,16 @@
+django==4.2.3
+django_vite_plugin
+{% if database == 'postgres' %}
+psycopg==3.1.8
+psycopg-binary==3.1.8
+{% elif database == 'mysql' %}
+mysqlclient==2.2.0
+{% endif %}
+# Dev
+pylint
+black
+isort
+djlint
+django-debug-toolbar
+django-extensions
+ipython
