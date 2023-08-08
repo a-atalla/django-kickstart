@@ -8,6 +8,7 @@ init:
 	pip install -r requirements.txt && \
 	npm install
 
+
 run: 
 	python manage.py runserver 8080
 
@@ -19,3 +20,4 @@ migrate:
 
 shell:
 	python manage.py shell_plus --ipython
+

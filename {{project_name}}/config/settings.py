@@ -9,12 +9,15 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
+
 import environ
 import os
+
 import logging
 from pathlib import Path
 
 log = logging.getLogger(__name__)
+
 
 env = environ.Env(
     # set casting, default value
@@ -24,13 +27,15 @@ env = environ.Env(
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 DEBUG = env('DEBUG')
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY=env('SECRET_KEY')
+
 
 ALLOWED_HOSTS = []
 
@@ -80,6 +85,7 @@ TEMPLATES = [
     },
 ]
 
+
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST=env('EMAIL_HOST')
 EMAIL_PORT=env('EMAIL_PORT')
@@ -98,6 +104,7 @@ DATABASES = {
 }
 {% else %}
 DATABASES = { "default": env.db() }
+
 {% endif %}
 
 # Password validation
