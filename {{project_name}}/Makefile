@@ -1,7 +1,9 @@
-.PHONY: env run migrations migrate shell
+SHELL=/bin/bash
+
+.PHONY: init run migrations migrate shell
 
 init:
-	mv .env.example .env && \
+	cp .env.example .env && \
 	git init && \
 	python3 -m venv .venv && \
 	source .venv/bin/activate && \
@@ -10,7 +12,7 @@ init:
 
 
 run: 
-	python manage.py runserver 8080
+	python manage.py runserver 8000
 
 migrations:
 	python manage.py makemigrations
@@ -20,4 +22,3 @@ migrate:
 
 shell:
 	python manage.py shell_plus --ipython
-
