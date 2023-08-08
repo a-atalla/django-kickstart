@@ -9,25 +9,28 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import environ
+import os
 import logging
 from pathlib import Path
 
 log = logging.getLogger(__name__)
 
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False)
+)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+DEBUG = env('DEBUG')
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-1gafiir=hz_h^5(2o2wd!om5lb8rr1s(=#l%j#erlg^md8(j8r"
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+SECRET_KEY=env('SECRET_KEY')
 
 ALLOWED_HOSTS = []
 
@@ -77,6 +80,10 @@ TEMPLATES = [
     },
 ]
 
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST=env('EMAIL_HOST')
+EMAIL_PORT=env('EMAIL_PORT')
+
 WSGI_APPLICATION = "config.wsgi.application"
 
 
@@ -89,28 +96,8 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
-{% elif database == "postgres" %}
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "",
-        "USER": "",
-        "PASSWORD": "",
-        "HOST": "127.0.0.1",
-        "PORT": "5432",
-    }
-}
-{% elif database == "mysql" %}
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": "",
-        "USER": "",
-        "PASSWORD": "",
-        "HOST": "127.0.0.1",
-        "PORT": "3306",
-    }
-}
+{% else %}
+DATABASES = { "default": env.db() }
 {% endif %}
 
 # Password validation
