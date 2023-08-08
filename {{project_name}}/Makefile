@@ -1,7 +1,13 @@
 .PHONY: init run migrations migrate shell
 
 init:
-	git init && python3 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt
+	mv .env.example .env && \
+	git init && \
+	python3 -m venv .venv && \
+	source .venv/bin/activate && \
+	pip install -r requirements.txt && \
+	npm install
+
 
 run: 
 	python manage.py runserver 8080
