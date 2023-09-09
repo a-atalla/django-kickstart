@@ -1,7 +1,6 @@
 version: '3.1'
 services:
   database:
-  {% if database == 'postgres' %}
     image: postgres:14-alpine
     restart: always
     environment:
@@ -10,17 +9,6 @@ services:
       POSTGRES_DB: app_name
     ports:
       - 5432:5432
-  {% elif database == 'mysql' %}
-    image: mariadb:10
-    restart: always
-    environment:
-      MARIADB_ROOT_PASSWORD: mariadb
-      MARIADB_USER: mariadb
-      MARIADB_PASSWORD: mariadb
-      MARIADB_DATABASE: app_name
-    ports:
-      - 3306:3306
-  {% endif %}
   adminer:
     image: adminer
     restart: always
