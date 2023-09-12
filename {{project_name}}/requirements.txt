@@ -1,8 +1,8 @@
 django==4.2.3
 django_vite_plugin
 django-environ==0.10.0
-psycopg==3.1.8
-psycopg-binary==3.1.8
+psycopg2-binary
+django-tenants
 # Dev
 pylint
 black

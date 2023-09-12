@@ -39,8 +39,9 @@ SECRET_KEY=env('SECRET_KEY')
 
 ALLOWED_HOSTS = []
 
-INSTALLED_APPS = [
+SHARED_APPS = [
     # External Apps
+    "django_tenants",
     "django_vite_plugin",
     "debug_toolbar",
     "django_extensions",
@@ -56,7 +57,23 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 ]
 
+TENANT_APPS = [
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+]
+INSTALLED_APPS = list(SHARED_APPS) + [app for app in TENANT_APPS if app not in SHARED_APPS]
+
+TENANT_MODEL = "core.Tenant"
+TENANT_DOMAIN_MODEL = "core.Domain"
+PUBLIC_SCHEMA_URLCONF = 'config.urls_public'
+SHOW_PUBLIC_IF_NO_TENANT_FOUND=True
+
 MIDDLEWARE = [
+    "django_tenants.middleware.main.TenantMainMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -95,7 +112,13 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-DATABASES = { "default": env.db() }
+DATABASES = { 
+    "default": env.db(engine='django_tenants.postgresql_backend')
+}
+
+DATABASE_ROUTERS = (
+    'django_tenants.routers.TenantSyncRouter',
+)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

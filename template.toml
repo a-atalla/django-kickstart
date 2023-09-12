@@ -4,6 +4,7 @@ ignore = [
     "{{project_name}}/.venv",
     "{{project_name}}/node_modules",
     "{{project_name}}/db.sqlite3",
+    "{{project_name}}/static",
 ]
 directory = "{{project_name}}"
 copy_without_render = ["*.html"]

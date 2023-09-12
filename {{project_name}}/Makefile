@@ -1,6 +1,6 @@
 SHELL=/bin/bash
 
-.PHONY: init run migrations migrate shell
+.PHONY: init npm run dev migrations migrate shell
 
 init:
 	cp .env.example .env && \
@@ -10,10 +10,12 @@ init:
 	pip install -r requirements.txt && \
 	npm install
 
-
+npm:
+	npm run dev
 run: 
 	python manage.py runserver 8000
-
+dev:
+	make -j 2 npm run
 migrations:
 	python manage.py makemigrations
 
